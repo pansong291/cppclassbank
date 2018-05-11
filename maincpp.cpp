@@ -13,6 +13,11 @@ void main()
 // 	s1.settle(90);
 // 	s0.show();
 // 	s1.show();
-	Date d(2018,5,10);
-	d.show();
+	Date d1(2003,1,1),d2(2009,1,1);
+	d1.show();
+	d1.getOrdinalDays();
+	d2.show();
+	d2.getOrdinalDays();
+	d1.distance(d2);
+	d2.distance(d1);
 }

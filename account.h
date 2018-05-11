@@ -5,8 +5,8 @@ class SavingsAccount
 {
 	int id; //帐号
 	double balance;	//余额
-  double rate; //年利率
-  int lastDate; //上次变更余额的日期
+	double rate; //年利率
+	int lastDate; //上次变更余额的日期
 	double accumulation; //余额按日累加之和
 	double accumulate(int date); //获得到指定日期为止的存款金额按日累积值
 public:
