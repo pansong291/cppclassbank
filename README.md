@@ -1,2 +1,1 @@
-# cppclassbank  
-c++ lesson's wrok
+# cppclassbank
