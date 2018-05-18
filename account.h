@@ -2,10 +2,17 @@
 #define  _ACCOUNT_H_
 #include"date.h"
 
-class SavingsAccount
+class Account
+{
+	int id;//帐号
+public:
+	Account(int id);//构造函数
+	void show()const;//输出帐号信息
+};
+
+class SavingsAccount:public Account
 {
 	static double total;//所有账户的总金额
-	int id;//帐号
 	double balance;//余额
 	double rate;//年利率
 	Date lastDate;//上次变更余额的日期

@@ -2,11 +2,19 @@
 #include"date.h"
 #include<iostream.h>
 
+Account::Account(int id)
+{
+	this->id=id;
+}
+void Account::show()const
+{
+	cout<<"帐户:"<<id<<endl;
+}
+
 double SavingsAccount::total=0;
-SavingsAccount::SavingsAccount(Date date,int id,double rate)
+SavingsAccount::SavingsAccount(Date date,int id,double rate):Account(id)
 {
 	lastDate=date;
-	this->id=id;
 	this->rate=rate;
 	balance=0;
 	accumulation=0;
@@ -17,7 +25,6 @@ double SavingsAccount::accumulate(Date date)const//获得到指定日期为止的存款金额
 {
 	double x=balance*lastDate.distance(date);
 	cout<<id<<"帐户累积金额："<<accumulation+x<<endl;
-	lastDate=date;
 	return x;
 }
 void SavingsAccount::deposit(Date date,double amount)//存入现金
@@ -29,6 +36,7 @@ void SavingsAccount::deposit(Date date,double amount)//存入现金
 	balance+=amount;
 	cout<<"  余额："<<balance<<endl;
 	total+=amount;
+	lastDate=date;
 }
 void SavingsAccount::withdraw(Date date,double amount)//取出现金
 {
@@ -43,6 +51,7 @@ void SavingsAccount::withdraw(Date date,double amount)//取出现金
 	balance-=amount;
 	cout<<"  余额："<<balance<<endl;
 	total-=amount;
+	lastDate=date;
 }
 void SavingsAccount::settle(Date date)//结算利息
 {
@@ -61,6 +70,7 @@ void SavingsAccount::settle(Date date)//结算利息
 	balance+=lx;
 	total+=lx;
 	accumulation=0;
+	lastDate=date;
 }
 void SavingsAccount::show()const//输出账户信息
 {
