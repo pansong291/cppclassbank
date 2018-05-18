@@ -54,7 +54,7 @@ int Date::distance(const Date& date)const//计算当前日期与指定日期之间相差天数
 	}
 	allDays-=small->getOrdinalDays();
 	allDays+=big->getOrdinalDays();
-	cout<<"相差"<<allDays<<"天\n";
+	cout<<"  相差"<<allDays<<"天\n";
 	return allDays;
 }
 int Date::getOrdinalDays()const//得到当前日期是该年的第几天
@@ -85,7 +85,7 @@ int Date::getOrdinalDays()const//得到当前日期是该年的第几天
 	case 1:
 		days+=31;
 	}
-	cout<<month<<"月"<<day<<"日是"<<year<<"年的第"<<days<<"天\n";
+	cout<<"  "<<month<<"月"<<day<<"日是"<<year<<"年的第"<<days<<"天\n";
 	return days;
 }
 int Date::getYear()const{return year;}

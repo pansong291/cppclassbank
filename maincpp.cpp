@@ -15,7 +15,7 @@ void main()
 	s1.withdraw(d22,4000);
 	s1.settle(d3);
 	s1.show();
-	SavingsAccount::getTotal();
+	cout<<"¹²¼Æ"<<Account::getTotal()<<"Ôª\n";
 }
 
 // 	Date d1(2003,2,4),d2(2004,1,1);
