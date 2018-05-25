@@ -16,7 +16,7 @@ bool Date::isLeapYear()const//判断当年是否为闰年
 {
 	return year%4==0&&year%100!=0||year%400==0;
 }
-int Date::distance(const Date& date)const//计算当前日期与指定日期之间相差天数
+int Date::operator-(const Date& date)const//计算当前日期与指定日期之间相差天数
 {
 	int allDays=0;
 	const Date *big,*small;

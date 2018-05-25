@@ -9,8 +9,11 @@ class Account
 	double balance;//余额
 public:
 	Account(int id);//构造函数
+	virtual void deposit(Date date,double amount)=0;//存入现金
+	virtual void withdraw(Date date,double amount)=0;//取出现金
+	virtual void settle(Date date)=0;
+	virtual void show()const=0;//输出帐号信息
 	int getId()const;
-	void show()const;//输出帐号信息
 	void setBalance(double balance);
 	double getBalance()const;
 	static void setTotal(double total);
@@ -29,6 +32,7 @@ public:
 	void withdraw(Date date,double amount);//取出现金
 	void settle(Date date);//结算利息，每年1月1日调用一次该函数
 	double getRate()const;
+	void show()const;
 };
 
 class CreditAccount:public Account
@@ -44,8 +48,11 @@ class CreditAccount:public Account
 public:
 	CreditAccount(Date date,int id,double rate);
 	double getAvailableCredit()const;//获得可用信用额度
+	void deposit(Date date,double amount);//存入现金
 	void withdraw(Date date,double amount);//取出现金
-	void repayment(Date date,double amount);//还款
+	//void repayment(Date date,double amount);//还款
+	void settle(Date date);//结算利息，每月1日调用一次该函数
+	void show()const;
 };
 
 #endif

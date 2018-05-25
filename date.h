@@ -13,7 +13,7 @@ public:
 	int getDay()const;
 	void show()const;//输出当前日期
 	bool isLeapYear()const;//判断当年是否为闰年
-	int distance(const Date& date)const;//计算当前日期与指定日期之间相差天数
+	int operator-(const Date& date)const;//计算当前日期与指定日期之间相差天数
 	int getOrdinalDays()const;//得到当前日期是该年的第几天
 };
 

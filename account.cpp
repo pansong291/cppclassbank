@@ -22,11 +22,12 @@ void Account::setTotal(double total)
 	Account::total=total;
 }
 double Account::getTotal(){return total;}
+/*
 void Account::show()const//输出账户信息
 {
 	cout<<"帐户："<<id<<endl;
-	cout<<"余额："<<balance<<endl;
-}
+	cout<<"  余额："<<balance<<endl;
+}*/
 
 /*********************  SavingsAccount  *********************/
 SavingsAccount::SavingsAccount(Date date,int id,double rate):Account(id)
@@ -39,7 +40,7 @@ SavingsAccount::SavingsAccount(Date date,int id,double rate):Account(id)
 }
 double SavingsAccount::accumulate(Date date)const//获得到指定日期为止的存款金额
 {
-	double x=getBalance()*lastDate.distance(date);
+	double x=getBalance()*(lastDate-date);
 	cout<<getId()<<"帐户累积金额："<<accumulation+x<<endl;
 	return x;
 }
@@ -71,6 +72,7 @@ void SavingsAccount::withdraw(Date date,double amount)//取出现金
 }
 void SavingsAccount::settle(Date date)//结算利息
 {
+	if(date.getMonth()!=1)return;
 	double rje,lx;//日均额，利息
 	//判断去年是否是闰年
 	int lastYear=date.getYear()-1;
@@ -89,6 +91,11 @@ void SavingsAccount::settle(Date date)//结算利息
 	lastDate=date;
 }
 double SavingsAccount::getRate()const{return rate;}
+void SavingsAccount::show()const
+{
+	cout<<"储蓄帐户："<<getId()<<endl;
+	cout<<"  余额："<<getBalance()<<endl;
+}
 
 /*********************  CreditAccount  *********************/
 CreditAccount::CreditAccount(Date date,int id,double rate):Account(id)
@@ -107,7 +114,7 @@ double CreditAccount::getDebt()const//获得欠款额
 }
 double CreditAccount::accumulate(Date date)const//计算累积利息
 {
-	return -getBalance()*(lastDate.distance(date))*rate;
+	return -getBalance()*(lastDate-date)*rate;
 }
 void CreditAccount::withdraw(Date date,double amount)//取出现金
 {
@@ -122,6 +129,7 @@ void CreditAccount::withdraw(Date date,double amount)//取出现金
 	setBalance(getBalance()-amount);
 	lastDate=date;
 }
+/*
 void CreditAccount::repayment(Date date,double amount)//还款
 {
 	cout<<getId()<<"帐户"<<date.getYear()<<"年"<<date.getMonth()<<"月"
@@ -141,9 +149,47 @@ void CreditAccount::repayment(Date date,double amount)//还款
 	setBalance(getBalance()+amount-interest);
 	interest=0;
 	lastDate=date;
+}*/
+void CreditAccount::deposit(Date date,double amount)//存入现金，还款
+{
+	cout<<getId()<<"帐户"<<date.getYear()<<"年"<<date.getMonth()<<"月"
+		<<date.getDay()<<"日还款："<<amount<<endl;
+	if(getBalance()>=0)
+	{
+		cout<<"  无需还款\n";
+		return;
+	}
+	interest+=accumulate(date);
+	cout<<"  利息："<<interest<<endl;
+	if(amount+getDebt()<0)
+	{
+		cout<<"  还款不足\n";
+		return;
+	}
+	setBalance(getBalance()+amount-interest);
+	interest=0;
+	lastDate=date;
+}
+void CreditAccount::settle(Date date)//结算利息
+{
+	cout<<getId()<<"帐户"<<date.getYear()<<"年"<<date.getMonth()<<"月"
+		<<date.getDay()<<"日结算利息\n";
+	interest+=accumulate(date);
+	//cout<<"  日均额："<<rje<<endl;
+	cout<<"  利息："<<interest<<endl;
+	setBalance(getBalance()+interest);
+	setTotal(getTotal()+interest);
+	interest=0;
+	lastDate=date;
 }
 double CreditAccount::getAvailableCredit()const//获得可用信用额度
 {
 	cout<<"  可用信用额度："<<credit+getBalance()<<endl;
 	return credit+getBalance();
+}
+void CreditAccount::show()const
+{
+	cout<<"信用帐户："<<getId()<<endl;
+	cout<<"  欠款额："<<getBalance()<<endl;
+	getAvailableCredit();
 }

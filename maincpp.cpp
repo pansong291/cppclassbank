@@ -16,7 +16,8 @@ void main()
 	s1.withdraw(d22,4000);
 	s1.settle(d3);
 	c0.withdraw(d4,2000);
-	c0.repayment(d5,2016);
+	//c0.repayment(d5,2016);
+	c0.deposit(d5,2016);
 	s0.show();
 	s1.show();
 	c0.show();
