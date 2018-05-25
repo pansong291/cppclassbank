@@ -39,7 +39,7 @@ class CreditAccount:public Account
 	double fee;//信用卡年费
 	double interest;//产生的利息
 	Date lastDate;
-	void accumulate();//计算累积利息
+	double accumulate(Date date)const;//计算累积利息
 	double getDebt()const;//获得欠款额
 public:
 	CreditAccount(Date date,int id,double rate);
