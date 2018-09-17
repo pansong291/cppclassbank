@@ -1,3 +1,3 @@
 # cppclassbank
 
-[testURL](././issues)
+[testURL](../../issues)
